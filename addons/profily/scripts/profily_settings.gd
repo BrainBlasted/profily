@@ -164,4 +164,7 @@ static func register_all() -> void:
 ## never registered the profily/* keys).
 static func value_or(key: String, fallback: Variant) -> Variant:
 	assert(SETTINGS.has(key), "Unknown Profily setting: %s" % key)
-	return ProjectSettings.get_setting(key, fallback)
+	if (ProjectSettings.has_setting(key)):
+		return ProjectSettings.get_setting_with_override(key)
+	else:
+		return fallback
